@@ -13,8 +13,10 @@ bundle check || bundle install
 # Set up database and add any development seed data
 bin/rake dev:prime
 
-# Add binstubs to PATH via export PATH=".git/safe/../../bin:$PATH" in ~/.zshenv
-mkdir -p .git/safe
+if [ -d .git/safe ] && echo $PATH | grep .git/safe > /dev/null; then
+  # Add binstubs to PATH via export PATH=".git/safe/../../bin:$PATH" in ~/.zshenv
+  echo "When you trust this repo, remember to run: mkdir -p .git/safe"
+fi
 
 # Only if this isn't CI
 # if [ -z "$CI" ]; then
